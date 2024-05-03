@@ -1,16 +1,15 @@
-import {React, useRef, useEffect, useCallback } from "react";
+import {React, useRef, useEffect } from "react";
 
 //Screens
 import MainScreen from './Components/MainScreen/MainScreen';
 import Profile from './Components/Profile/Profile';
 import Contact from './Components/ContactScreen/Contact';
-import { WishletScreen } from "./Components/Wishlets/WishletScreen";
+import Wishlet from './Components/Wishlets/Wishlet';
 import Cart from './Components/CartScreen/Cart';
 import Thankyou from "./Components/ThankyouScreen/Thankyou";
-import ProductCategory from "./Components/ProductCategory/ProductCategory";
+import ProductCategory from "./Components/ThankyouScreen/ProductCategory/ProductCategory";
 import Item from "./Components/ProductItems/Item";
 import CartIcon from "./UI/CartIcon";
-import Context from "./Components/Context/Context";
 
 //Dependencies
 import { StyleSheet , View, TouchableOpacity ,Image} from 'react-native';
@@ -19,7 +18,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from '@react-navigation/stack';
 import * as Animatable from 'react-native-animatable';
-import { useFonts } from "expo-font";
 
 
 
@@ -34,7 +32,7 @@ const TabsArray = [
     {name:'Profile', component:Profile, icon:'log-in-outline'},
     {name:'Contact', component:Contact, icon:'document-text'},
     {name:'Home', component:MainScreen, icon:'home-outline'},
-    {name:'Wishlet', component:WishletScreen, icon:'heart'},
+    {name:'Wishlet', component:Wishlet, icon:'heart'},
     {name:'Cart', component:Cart, icon:'cart-outline'}
   ];
   
@@ -113,32 +111,7 @@ const TabsArray = [
     )}
 
 
-export default function App ()  {
-
-  const [fontsLoaded] = useFonts({
-    Mogra: require("./assets/Fonts/MograRegular.ttf"),
-    Neon: require("./assets/Fonts/NeonderthawRegular.ttf"),
-    Jomolhar: require("./assets/Fonts/JomolhariRegular.ttf"),
-    InikaRegular: require("./assets/Fonts/InikaRegular.ttf"),
-    InikaBold: require("./assets/Fonts/InikaBold.ttf"),
-    PoppinsRegular: require("./assets/Fonts/PoppinsRegular.ttf"),
-    PoppinsMedium: require("./assets/Fonts/PoppinsMedium.ttf"),
-    InriaRegular: require("./assets/Fonts/InriaSerifRegular.ttf"),
-    InriaBold: require("./assets/Fonts/InriaSerifBold.ttf"),
-    
-  })
-
-  const onLayoutView  = useCallback(async()=>{
-
-    if (!fontsLoaded){
-     await <Cart/>;
-    }
-  }, [fontsLoaded])
- 
- 
-
-
-
+export const Index = () => {
  
   const headerLeft = ({ onPress }) => (
     <TouchableOpacity onPress={onPress}>
@@ -158,14 +131,12 @@ export default function App ()  {
 
     return (
    
-    <Context>
-         <NavigationContainer>
-         <Stack.Navigator screenOptions={{
+        <Stack.Navigator screenOptions={{
           headerStyle: {
           backgroundColor: '#F9A5AE', 
         }, headerTitleAlign: 'center',
         headerTitleStyle: {
-          fontFamily: 'Mogra',
+        //   fontFamily: 'Mogra',
         },headerLeft: headerLeft,
       
         headerRight:headerRight
@@ -173,12 +144,16 @@ export default function App ()  {
        >
       <Stack.Screen name="first" component={HomeStack} options={{headerShown: false}} />
       <Stack.Screen name="Item" component={Item} options={{headerShown: false}} />
-      <Stack.Screen name="CategoryProduct" component={ProductCategory} />
+      <Stack.Screen name='HouseHold' component={ProductCategory} />
+      <Stack.Screen name='Crockery' component={ProductCategory} />
+      <Stack.Screen name='Gifts' component={ProductCategory}  />
+      <Stack.Screen name='Jewellery' component={ProductCategory}  />
+      <Stack.Screen name='Sports' component={ProductCategory} />
+      <Stack.Screen name='Toys' component={ProductCategory}  />
+      <Stack.Screen name='Fashion' component={ProductCategory}  />
       <Stack.Screen name='Thankyou' component={Thankyou}  options={{headerShown:false}} />
     
     </Stack.Navigator>
-       </NavigationContainer>
-    </Context>
       
     );
   };
@@ -222,8 +197,7 @@ export default function App ()  {
     fontSize: 12,
     textAlign: 'center',
     color: '#4f224f',
-    fontWeight: '500',
-
+    fontWeight: '500'
   },
   focusedd:{
   color:'white',
