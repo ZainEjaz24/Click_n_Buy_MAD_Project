@@ -10,7 +10,8 @@ import Thankyou from "./Components/ThankyouScreen/Thankyou";
 import ProductCategory from "./Components/ProductCategory/ProductCategory";
 import Item from "./Components/ProductItems/Item";
 import CartIcon from "./UI/CartIcon";
-import Context from "./Components/Context/Context";
+import { BuyScreen } from "./Components/BuyNowScreen/BuyScreen";
+
 
 //Dependencies
 import { StyleSheet , View, TouchableOpacity ,Image} from 'react-native';
@@ -20,7 +21,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from '@react-navigation/stack';
 import * as Animatable from 'react-native-animatable';
 import { useFonts } from "expo-font";
-
+import Context from "./Components/Context/Context";
+import { ModalPortal } from "react-native-modals";
+import { Adress } from "./Components/BuyNowScreen/Adress";
+import LoginScreen from "./Components/Register/LoginScreen";
+import SignupScreen from "./Components/Register/SignupScreen";
 
 
 
@@ -171,13 +176,18 @@ export default function App ()  {
         headerRight:headerRight
       }} 
        >
+        <Stack.Screen name="Signin" component={LoginScreen} options={{headerShown: false}} />
+        <Stack.Screen name="Signup" component={SignupScreen} options={{headerShown: false}} />
       <Stack.Screen name="first" component={HomeStack} options={{headerShown: false}} />
       <Stack.Screen name="Item" component={Item} options={{headerShown: false}} />
       <Stack.Screen name="CategoryProduct" component={ProductCategory} />
+      <Stack.Screen name="Buynow" component={BuyScreen} options={{headerShown: false}} />
+      <Stack.Screen name="Adress" component={Adress} options={{headerShown: false}} />
       <Stack.Screen name='Thankyou' component={Thankyou}  options={{headerShown:false}} />
     
     </Stack.Navigator>
        </NavigationContainer>
+       <ModalPortal />
     </Context>
       
     );

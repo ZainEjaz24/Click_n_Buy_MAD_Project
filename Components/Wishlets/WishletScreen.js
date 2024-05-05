@@ -4,6 +4,7 @@ import wishletStyle from './WishletStyle'
 import Button from '../../UI/Button'
 import { Header } from '../Header/Header'
 import Wishlet from './Wishlet';
+import { BackView } from '../../UI/BackView'
 
 
 export const WishletScreen = ({navigation}) => {
@@ -27,7 +28,7 @@ export const WishletScreen = ({navigation}) => {
     }
 
   return (
-    <View style={wishletStyle.wishletView}>
+    <BackView>
 
         <Header />
 
@@ -47,6 +48,6 @@ export const WishletScreen = ({navigation}) => {
         </Button>
        </View>
 
-    </View>
+       </BackView>
   )
 }
